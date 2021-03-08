@@ -13,6 +13,6 @@ export default object().shape({
     .matches(/[a-zA-Z]/, "Поле может содержать только латиницу")
     .required("Фамилия обязательное поле"),
   mobile_phone: string()
-    .phone('BY', true, '${path} is invalid')
+    .phone("BY", true, " is invalid")
     .required("Телефон обязательное поле"),
 });

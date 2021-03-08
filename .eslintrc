@@ -4,7 +4,7 @@
     "airbnb",
     "airbnb/hooks",
     "plugin:prettier/recommended",
-    "prettier/react",
+    "prettier",
     "eslint:recommended"
   ],
   "plugins": ["react", "prettier"],
