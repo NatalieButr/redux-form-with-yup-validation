@@ -3,94 +3,59 @@ import { Field, reduxForm } from "redux-form";
 
 import FormSchema from "schemas/formSchema";
 
-export const fieldsProps = Object.keys(FormSchema.fields);
-console.log(fieldsProps);
+import PhoneInput from "components/common/PhoneInput";
 
-const asyncValidate = (values) => {
-  return new Promise((resolve, reject) => {
-    console.log(values);
+import { validator } from "../utils";
 
-    // Validate our form values against our schema! Also dont abort the validate early.
-    FormSchema.validate(values, { abortEarly: false })
-      .then(() => {
-        // form is valid happy days!
-        alert("Your form is valid!");
-        resolve();
-      })
-      .catch((errors) => {
-        // form is not valid, yup has given us errors back. Lets transform them into something redux can understand.
+export const fields = Object.keys(FormSchema.fields);
 
-        let reduxFormErrors = {};
-
-        errors.inner.forEach((error) => {
-          reduxFormErrors[error.path] = error.message;
-        });
-
-        // redux form will now understand the errors that yup has thrown
-        reject(reduxFormErrors);
-      });
-  });
+const renderInput = ({ input, label, type, meta: { touched, error } }) => {
+  return (
+    <>
+      <label htmlFor={input.name} className="form-label">
+        {label}
+      </label>
+      <input {...input} type={type} className="form-control" />
+      {touched && error && <span className="error">{error}</span>}
+    </>
+  );
 };
-
 function Form(props) {
-  const { fields, handleSubmit } = props;
-
-  console.log(fields);
-
-  const renderInput = (field) => {
-    // Define stateless component to render input and errors
-
-    console.log(field);
-    return (
-      <div>
-        <input {...field.input} type={field.type} />
-        {field.meta.touched && field.meta.error && (
-          <span className="error">{field.meta.error}</span>
-        )}
-      </div>
-    );
-  };
+  const { handleSubmit } = props;
 
   return (
     <form className="row g-3" onSubmit={handleSubmit(() => alert("success!"))}>
       <div className="col-md-6">
-        <label htmlFor="last_name" className="form-label">
-          Фамилия
-        </label>
-
         <Field
-          name="last_name" // Specify field name
-          component={renderInput} // Specify render component above
+          name="last_name"
+          component={renderInput}
           type="text"
-          className="form-control"
           id="last_name"
+          label="Фамилия"
         />
       </div>
       <div className="col-md-6">
-        <label htmlFor="first_name" className="form-label">
-          Имя
-        </label>
         <Field
           type="text"
-          component="input"
-          className="form-control"
+          component={renderInput}
           id="first_name"
+          name="first_name"
+          label="Имя"
         />
       </div>
       <div className="col-12">
-        <label htmlFor="inputAddress" className="form-label">
-          Address
-        </label>
-        <input
-          type="text"
+        <Field
+          label="Номер телефона"
+          type="tel"
+          name="mobile_phone"
+          component={PhoneInput}
           className="form-control"
-          id="inputAddress"
-          placeholder="1234 Main St"
+          id="mobile_phone"
         />
       </div>
       <div className="col-12">
         <button type="submit" className="btn btn-primary">
-          Sign in
+          Зарегистроваться
         </button>
       </div>
     </form>
@@ -99,6 +64,6 @@ function Form(props) {
 
 export default reduxForm({
   form: "formSimple",
-  fields: fieldsProps,
-  asyncValidate,
+  fields,
+  asyncValidate: (v) => validator(v, FormSchema),
 })(Form);
