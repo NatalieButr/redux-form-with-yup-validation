@@ -1,0 +1,59 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "eslint:recommended"
+  ],
+  "plugins": ["react", "prettier"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "jsx-a11y/href-no-hash": ["off"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "max-len": [
+      "warn",
+      {
+        "code": 80,
+        "tabWidth": 2,
+        "comments": 100,
+        "ignoreComments": false,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/no-cycle": "off",
+    "no-param-reassign": "off",
+    "react/prop-types": "off",
+    "react/state-in-constructor": "off",
+    "prefer-const": "off",
+    "react/destructuring-assignment": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "react/button-has-type": "off",
+    "react/no-typos": "off",
+    "react/no-danger": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "no-new": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "camelcase": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  }
+}
