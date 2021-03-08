@@ -3,8 +3,6 @@ import { Field, reduxForm } from "redux-form";
 
 import FormSchema from "schemas/formSchema";
 
-import PhoneInput from "components/common/PhoneInput";
-
 import { validator } from "../utils";
 
 export const fields = Object.keys(FormSchema.fields);
@@ -48,7 +46,7 @@ function Form(props) {
           label="Номер телефона"
           type="tel"
           name="mobile_phone"
-          component={PhoneInput}
+          component={renderInput}
           className="form-control"
           id="mobile_phone"
         />

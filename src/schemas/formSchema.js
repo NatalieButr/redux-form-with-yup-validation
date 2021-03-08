@@ -1,5 +1,5 @@
 import { object, string } from "yup";
-import { isValidPhoneNumber } from "react-phone-number-input";
+import "yup-phone";
 
 export default object().shape({
   first_name: string()
@@ -13,10 +13,6 @@ export default object().shape({
     .matches(/[a-zA-Z]/, "Поле может содержать только латиницу")
     .required("Фамилия обязательное поле"),
   mobile_phone: string()
-    .test({
-      name: "phone",
-      message: "Некорректный номер телефона",
-      test: (value) => isValidPhoneNumber(value),
-    })
-    .required(),
+    .phone('BY', true, '${path} is invalid')
+    .required("Телефон обязательное поле"),
 });

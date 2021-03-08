@@ -11,7 +11,8 @@
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
     "web-vitals": "^1.0.1",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "yup-phone": "^1.2.19"
   },
   "scripts": {
     "start": "react-scripts start",
