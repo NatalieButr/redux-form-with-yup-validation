@@ -7,7 +7,6 @@ export const validator = (values, schema) => {
       })
       .catch((errors) => {
         let reduxFormErrors = {};
-        console.log(errors);
         errors.inner.forEach((error) => {
           reduxFormErrors[error.path] = error.message;
         });
